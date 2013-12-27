@@ -1,5 +1,5 @@
 # Tell bochs to use our boot sector code as though it were
 # a floppy disk inserted into a computer at boot time.
-floppya: 1_44=target/boot.bin, status=inserted
+floppya: 1_44=target/image, status=inserted
 boot: a
 display_library: sdl

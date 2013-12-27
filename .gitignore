@@ -3,4 +3,3 @@
 *.bin
 *.o
 target/*
-src/disk_load.asm
