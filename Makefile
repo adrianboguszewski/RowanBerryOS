@@ -18,7 +18,7 @@ TMP = ${C_SOURCES:$(SRC)/%=$(TARGET)/%}
 OBJ = ${TMP:.c=.o}
 
 # default build target
-all: image
+all: clean image
 	
 image: $(TARGET)/boot.bin $(TARGET)/kernel.bin
 	cat $^ > $(TARGET)/image

@@ -1,1 +1,1 @@
-Repository to keep source for BirdOS.
+Repository to keep source for RowanBerryOS.

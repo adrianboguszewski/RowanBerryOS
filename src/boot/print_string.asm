@@ -1,8 +1,11 @@
 ; print string in real mode
-; address of string passed with bx
+; address of string passed with stack
 print_string:
+    push bp
+    mov bp, sp
     push ax
     push bx
+    mov bx, [bp + 4]
     mov ah, 0x0e    ; int=0x10/ah=0x0e -> BIOS tele-type output
     
 lp:
@@ -16,4 +19,5 @@ lp:
 exit:
     pop bx
     pop ax
+    pop bp
     ret

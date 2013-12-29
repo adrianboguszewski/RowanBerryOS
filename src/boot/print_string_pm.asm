@@ -4,11 +4,14 @@ VIDEO_MEMORY equ 0xb8000
 WHITE_ON_RED equ 0x4f
 
 ; print string in protected mode
-; address of string passed with ebx
+; address of string passed with stack
 print_string_pm:
+    push ebp
+    mov ebp, esp
     push eax
     push ebx
     push edx
+    mov ebx, [ebp + 8]
     mov edx, VIDEO_MEMORY
     
 loop:
@@ -29,4 +32,5 @@ done:
     pop edx
     pop ebx
     pop eax
+    pop ebp
     ret
