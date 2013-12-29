@@ -1,5 +1,5 @@
 # Tell bochs to use our boot sector code as though it were
 # a floppy disk inserted into a computer at boot time.
-floppya: 1_44=target/image, status=inserted
-boot: a
+ata0-master: type=disk, path=target/image, mode=flat, cylinders=256, heads=16, spt=64
+boot: disk
 display_library: sdl
