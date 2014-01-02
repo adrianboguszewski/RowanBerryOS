@@ -10,8 +10,8 @@ SIZE1=$$((65536 - $(SIZE)))
 # disk size = 128 MB
 SIZE2=$$(((134217728 - $(SIZE)) / 512))
 
-C_SOURCES = $(wildcard $(SRC)/kernel/*.c)
-HEADERS = $(wildcard $(SRC)/kernel/*.h)
+C_SOURCES = $(wildcard $(SRC)/kernel/*.c $(SRC)/drivers/*.c)
+HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h)
 
 # convert *.c to *.o and src to target
 TMP = ${C_SOURCES:$(SRC)/%=$(TARGET)/%}
@@ -42,3 +42,4 @@ $(TARGET)/%.bin: $(SRC)/boot/%.asm
 clean:
 	rm -rf $(TARGET)/*
 	mkdir $(TARGET)/kernel
+	mkdir $(TARGET)/drivers
