@@ -40,6 +40,7 @@ $(TARGET)/%.bin: $(SRC)/boot/%.asm
 	$(ASSEMBLER) $< -f bin -i $(SRC)/ -o $@
 	
 clean:
-	rm -rf $(TARGET)/*
+	rm -rf $(TARGET)/
+	mkdir $(TARGET)
 	mkdir $(TARGET)/kernel
 	mkdir $(TARGET)/drivers
