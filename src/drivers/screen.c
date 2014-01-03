@@ -1,11 +1,6 @@
-#define VIDEO_ADDRESS 0xb8000
-#define MAX_ROWS 25
-#define MAX_COLS 80
-#define WHITE_ON_BLACK 0x0f	// Attribute byte for our default colour scheme.
-
-// Screen device I/O ports
-#define REG_SCREEN_CTRL 0x3D4
-#define REG_SCREEN_DATA 0x3D5
+#include "screen.h"
+#include "../kernel/util.h"
+#include "../kernel/low_level.h"
 
 void print(char* message) {
 	print_at(message, -1, -1);
@@ -20,6 +15,12 @@ void print_at(char* message, int col, int row) {
 	int i = 0;
 	while(message[i] != 0) {
 		print_char(message[i++], col, row, WHITE_ON_BLACK);
+		if(++col == MAX_COLS) {
+			col = 0;
+			if(++row == MAX_ROWS) {
+				row = MAX_ROWS-1;
+			}
+		}
 	}
 }
 
@@ -131,11 +132,11 @@ int handle_scrolling(int cursor_offset) {
 	/* Shuffle the rows back one. */
 	int i;
 	for(i=1; i<MAX_ROWS; i++) {
-		memory_copy(get_screen_offset(0, i)+VIDEO_ADDRESS, get_screen_offset(0 ,i-1)+VIDEO_ADDRESS, MAX_COLS*2);
+		memory_copy((char*)(get_screen_offset(0, i)+VIDEO_ADDRESS), (char*)(get_screen_offset(0 ,i-1)+VIDEO_ADDRESS), MAX_COLS*2);
 	}
 	
 	/* Blank the last line by setting all bytes to 0. */
-	char* last_line = get_screen_offset(0, MAX_ROWS-1) + VIDEO_ADDRESS;
+	char* last_line = (char*)(get_screen_offset(0, MAX_ROWS-1) + VIDEO_ADDRESS);
 	for(i=0; i<MAX_COLS*2; i++) {
 		last_line[i] = 0;
 	}
