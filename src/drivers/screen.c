@@ -1,6 +1,7 @@
-#include "screen.h"
+#include "../const/registers.h"
 #include "../kernel/util.h"
 #include "../kernel/low_level.h"
+#include "screen.h"
 
 void print(char* message) {
 	print_at(message, -1, -1);
