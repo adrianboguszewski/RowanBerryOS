@@ -5,7 +5,6 @@ disk_load:
     push bp
     mov bp, sp
     push bx
-    push dx
     push si
     mov bx, [bp + 4]
     mov dx, [bp + 6]
@@ -24,7 +23,6 @@ disk_load:
     cmp dh, al 
     jne disk_error  ; if sectors read not equals sectors expected
     pop si
-    pop dx
     pop bx 
     pop bp
     ret

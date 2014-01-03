@@ -7,8 +7,8 @@ SHELL=/bin/bash
 SIZE=`ls -l $(TARGET)/image | cut -d' ' -f5`
 # while kernel less than 64kB
 SIZE1=$$((65536 - $(SIZE)))
-# disk size = 128 MB
-SIZE2=$$(((134217728 - $(SIZE)) / 512))
+# disk size = 126 MB
+SIZE2=$$(((132120576 - $(SIZE)) / 512))
 
 C_SOURCES = $(wildcard $(SRC)/kernel/*.c $(SRC)/drivers/*.c)
 HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h)
@@ -40,6 +40,7 @@ $(TARGET)/%.bin: $(SRC)/boot/%.asm
 	$(ASSEMBLER) $< -f bin -i $(SRC)/ -o $@
 	
 clean:
-	rm -rf $(TARGET)/*
+	rm -rf $(TARGET)/
+	mkdir $(TARGET)
 	mkdir $(TARGET)/kernel
 	mkdir $(TARGET)/drivers
