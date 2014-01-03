@@ -3,10 +3,7 @@
 print_hex:
     push bp
     mov bp, sp
-    push ax
     push bx
-    push cx
-    push dx
     push di
     mov dx, [bp + 4]
     xor cx, cx
@@ -32,15 +29,11 @@ next:
     cmp cx, 1
     jg start
     
-    mov bx, HEX_OUT
-    push bx
+    push word HEX_OUT
     call print_string
     add sp, 2
     pop di
-    pop dx
-    pop cx
     pop bx
-    pop ax
     pop bp
     ret
     

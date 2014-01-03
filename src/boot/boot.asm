@@ -8,8 +8,7 @@ KERNEL_OFFSET equ 0x1000        ; address to which we will load kernel
     mov sp, bp
     
 ; DELETE
-;    mov bx, MSG_REAL_MODE       ; temporary for debugging
-;    push bx
+;    push word MSG_REAL_MODE       ; temporary for debugging
 ;    call print_string
 ;    add sp, 2
 
@@ -28,16 +27,14 @@ KERNEL_OFFSET equ 0x1000        ; address to which we will load kernel
 
 load_kernel:
 ; DELETE
-;    mov bx, MSG_LOAD_KERNEL     ; temporary for debugging
-;    push bx
+;    push word MSG_LOAD_KERNEL     ; temporary for debugging 
 ;    call print_string
 ;    add sp, 2
     
-    mov bx, KERNEL_OFFSET
     mov dh, 15                  ; load first 15 sectors
     mov dl, [BOOT_DRIVE]
     push dx
-    push bx
+    push word KERNEL_OFFSET
     call disk_load              ; load disk sectors
     add sp, 4
     ret
@@ -46,8 +43,7 @@ load_kernel:
 
 begin_pm:
 ; DELETE
-;    mov ebx, MSG_PROTECTED_MODE ; temporary for debugging
-;    push ebx
+;    push dword MSG_PROTECTED_MODE ; temporary for debugging
 ;    call print_string_pm 
 ;    add esp, 4   
     

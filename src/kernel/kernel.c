@@ -1,5 +1,5 @@
 void main() {
     clear_screen();
-    char* message = "\nWitamy! - RowanberryOS Team ;D";
+    char* message = "\nWitamy! - RowanBerryOS Team ;D";
     print(message);
 }

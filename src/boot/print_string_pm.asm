@@ -8,9 +8,7 @@ WHITE_ON_RED equ 0x4f
 print_string_pm:
     push ebp
     mov ebp, esp
-    push eax
     push ebx
-    push edx
     mov ebx, [ebp + 8]
     mov edx, VIDEO_MEMORY
     
@@ -29,8 +27,6 @@ loop:
     jmp loop
     
 done:
-    pop edx
     pop ebx
-    pop eax
     pop ebp
     ret
