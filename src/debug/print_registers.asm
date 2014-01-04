@@ -1,6 +1,6 @@
 [bits 32]
 global print_registers
-extern int_to_hex
+extern dword_to_hex
 extern print
 
 print_registers:
@@ -18,7 +18,7 @@ loop:
     push dword HEX
     mov eax, [ebp + 4 * ebx]
     push eax
-    call int_to_hex
+    call dword_to_hex
     add esp, 4
     call print
     add esp, 4

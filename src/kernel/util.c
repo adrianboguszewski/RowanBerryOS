@@ -13,7 +13,7 @@ char get_hex_from_int(unsigned char s)
         return s+= 'a' - 10;
 }
 
-void int_to_hex(unsigned int source, char* dest)
+void dword_to_hex(unsigned int source, char* dest)
 {
     unsigned int mask = 0x0000000f;
     for(int i = 0; i < 8; i++)

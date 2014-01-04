@@ -10,3 +10,4 @@
 #define REG_ATA_PRIMARY_5   0x1f5
 #define REG_ATA_PRIMARY_6   0x1f6
 #define REG_ATA_PRIMARY_7   0x1f7
+#define REG_ATA_PRIMARY_8   0x3f6

@@ -9,6 +9,6 @@ void main() {
     print_at(message, 70, 24);
     print(message);
     print_registers();
-    read_sectors(1, 1, (void*)0x10000);
-    print_memory((void*)0x7c00, 16);
+    read_sectors(0, 1, (void*)0x10000);
+    print_memory((void*)0x10000, 32);
 }

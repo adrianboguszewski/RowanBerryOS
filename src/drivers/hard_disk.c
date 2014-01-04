@@ -9,7 +9,7 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
 {
     if(start_lba + (int)sectors_number > MAX_LBA) 
     {
-        print_msg("Given LBA plus sectors number exceed maximum LBA for this disk\n");
+        print_msg("Given LBA plus sectors number exceed maximum LBA for disk\n");
         return LBA_EXCEED_DISK_SIZE;
     }
     
@@ -19,8 +19,8 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
     
     if(status & 0x88) 
     {
-        port_byte_out(REG_ATA_PRIMARY_7, 0x04);
-        port_byte_out(REG_ATA_PRIMARY_7, (unsigned char)~0x88);                // clear BSY and DRQ
+        port_byte_out(REG_ATA_PRIMARY_8, 0x04);
+        port_byte_out(REG_ATA_PRIMARY_8, 0x00);                // clear BSY and DRQ
         do
         {
             status = port_byte_in(REG_ATA_PRIMARY_7);
@@ -48,14 +48,11 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
     }
     while(!(status & 0x08) && (status & 0x80));                    // while BSY is set and DRQ is clear
     
-    port_byte_out(REG_ATA_PRIMARY_7, 0x04);
-    port_byte_out(REG_ATA_PRIMARY_7, status | 0x08);            // set DRQ
-    
-    int words = sectors_number * BPS / 2;
-    
+    unsigned int words = sectors_number * (BPS / 2);
+
     __asm__("rep insw"
             : 
-            : "b"(REG_ATA_PRIMARY_0), "c"(words), "D"(memory_buf)); // read sectors
+            : "c"(words), "d"(REG_ATA_PRIMARY_0), "D"(memory_buf)); // read sectors
     
     status = port_byte_in(REG_ATA_PRIMARY_7);
     
