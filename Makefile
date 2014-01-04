@@ -10,8 +10,9 @@ SIZE1=$$((65536 - $(SIZE)))
 # disk size = 126 MB
 SIZE2=$$(((132120576 - $(SIZE)) / 512))
 
+ASM_SOURCES = $(wildcard $(SRC)/kernel/*.asm $(SRC)/boot/*.asm)
 C_SOURCES = $(wildcard $(SRC)/kernel/*.c $(SRC)/drivers/*.c)
-HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h)
+HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h $(SRC)/const/*.h)
 
 # convert *.c to *.o and src to target
 TMP = ${C_SOURCES:$(SRC)/%=$(TARGET)/%}
@@ -38,6 +39,9 @@ $(TARGET)/%.o: $(SRC)/kernel/%.asm
 
 $(TARGET)/%.bin: $(SRC)/boot/%.asm
 	$(ASSEMBLER) $< -f bin -i $(SRC)/ -o $@
+	
+replace:
+	sed -i 's/\t/    /g' ${HEADERS} ${C_SOURCES} ${ASM_SOURCES}
 	
 clean:
 	rm -rf $(TARGET)/
