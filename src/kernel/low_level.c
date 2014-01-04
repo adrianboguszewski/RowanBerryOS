@@ -23,3 +23,9 @@ void port_word_out(unsigned short port, unsigned short data) {
     __asm__("out %%ax, %%dx" : : "a" (data), "d" (port));
 }
 
+unsigned char memory_byte(void* addr)
+{
+    unsigned char result;
+    __asm__("movl (%%esi), %%eax" : "=a"(result) : "S"(addr));
+    return result;
+}

@@ -2,13 +2,17 @@
 #include "../const/errors.h"
 #include "../const/machine.h"
 #include "../kernel/low_level.h"
+#include "../debug/debug.h"
 #include "hard_disk.h"
 
-int read_sectors(int start_lba, char sectors_number, void * memory_buf) 
+int read_sectors(int start_lba, char sectors_number, void* memory_buf) 
 {
     if(start_lba + (int)sectors_number > MAX_LBA) 
+    {
+        print_msg("Given LBA plus sectors number exceed maximum LBA for this disk\n");
         return LBA_EXCEED_DISK_SIZE;
-
+    }
+    
     unsigned char status;
     
     status = port_byte_in(REG_ATA_PRIMARY_7);                    // get status byte from ata device
@@ -16,7 +20,7 @@ int read_sectors(int start_lba, char sectors_number, void * memory_buf)
     if(status & 0x88) 
     {
         port_byte_out(REG_ATA_PRIMARY_7, 0x04);
-        port_byte_out(REG_ATA_PRIMARY_7, ~(0x88));                // clear BSY and DRQ
+        port_byte_out(REG_ATA_PRIMARY_7, (unsigned char)~0x88);                // clear BSY and DRQ
         do
         {
             status = port_byte_in(REG_ATA_PRIMARY_7);
@@ -37,7 +41,10 @@ int read_sectors(int start_lba, char sectors_number, void * memory_buf)
     {
         status = port_byte_in(REG_ATA_PRIMARY_7);                // get status
         if(status & 0x21)                                        // DF or ERR is set?
+        {
+            print_msg("A disk read error occured before reading\n");
             return DISK_READ_ERROR;
+        }
     }
     while(!(status & 0x08) && (status & 0x80));                    // while BSY is set and DRQ is clear
     
@@ -53,12 +60,15 @@ int read_sectors(int start_lba, char sectors_number, void * memory_buf)
     status = port_byte_in(REG_ATA_PRIMARY_7);
     
     if(status & 0x21)
+    {
+        print_msg("A disk read error occured after reading\n");
         return DISK_READ_ERROR;                                    // DF or ERR is set?
-    
+    }
+
     return OK;
 }    
 
-int write_sectors(int start_lba, char sectors_number, void * memory_buf)
+int write_sectors(int start_lba, char sectors_number, void* memory_buf)
 {
     return OK;
 }

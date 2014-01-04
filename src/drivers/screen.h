@@ -1,3 +1,6 @@
+#ifndef _SCREEN_H
+#define _SCREEN_H
+
 #define VIDEO_ADDRESS 0xb8000
 #define MAX_ROWS 25
 #define MAX_COLS 80
@@ -11,3 +14,5 @@ int get_screen_offset(int col, int row);
 int get_cursor();
 void set_cursor(int offset);
 int handle_scrolling(int cursor_offset);
+
+#endif
