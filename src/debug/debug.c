@@ -25,21 +25,21 @@ void print_msg(char* msg)
 
 void print_byte(unsigned char b)
 {
-	char* result = "0x00 \n";
-	byte_to_hex(b, result);
-	print(result);
+    char* result = "0x00 \n";
+    byte_to_hex(b, result);
+    print(result);
 }
 
 void print_word(unsigned short b)
 {
-	char* result = "0x0000 \n";
-	word_to_hex(b, result);
-	print(result);
+    char* result = "0x0000 \n";
+    word_to_hex(b, result);
+    print(result);
 }
 
 void print_dword(unsigned int b)
 {
-	char* result = "0x00000000 \n";
-	dword_to_hex(b, result);
-	print(result);
+    char* result = "0x00000000 \n";
+    dword_to_hex(b, result);
+    print(result);
 }
