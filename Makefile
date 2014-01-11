@@ -11,9 +11,9 @@ SIZE1=$$((65536 - $(SIZE)))
 SIZE2=$$(((132120576 - $(SIZE)) / 512))
 
 BOOT_SOURCES = $(wildcard $(SRC)/boot/*.asm)
-ASM_SOURCES = $(wildcard $(SRC)/kernel/*.asm $(SRC)/debug/*.asm)
-C_SOURCES = $(wildcard $(SRC)/kernel/*.c $(SRC)/drivers/*.c $(SRC)/debug/*.c)
-HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h $(SRC)/debug/*.h $(SRC)/const/*.h)
+ASM_SOURCES = $(wildcard $(SRC)/kernel/*.asm $(SRC)/debug/*.asm $(SRC)/boot/idt/*.asm)
+C_SOURCES = $(wildcard $(SRC)/kernel/*.c $(SRC)/drivers/*.c $(SRC)/debug/*.c $(SRC)/boot/idt/*.c)
+HEADERS = $(wildcard $(SRC)/kernel/*.h $(SRC)/drivers/*.h $(SRC)/debug/*.h $(SRC)/boot/idt/*.h $(SRC)/const/*.h)
 
 # convert *.c to *.o and src to target
 TMP = ${C_SOURCES:$(SRC)/%=$(TARGET)/%}
@@ -50,6 +50,7 @@ replace:
 clean:
 	rm -rf $(TARGET)/
 	mkdir $(TARGET)
+	mkdir -p $(TARGET)/boot/idt
 	mkdir $(TARGET)/kernel
 	mkdir $(TARGET)/drivers
 	mkdir $(TARGET)/debug

@@ -32,16 +32,16 @@ unsigned char memory_byte(void* addr)
 
 void read_disk(unsigned int words, unsigned short reg, void* memory_buf)
 {
-	__asm__("rep insw"
-            : 
-            : "c"(words), "d"(reg), "D"(memory_buf));
+    __asm__("rep insw"
+        : 
+        : "c"(words), "d"(reg), "D"(memory_buf));
 }
 
 void write_disk(unsigned int words, unsigned short reg, void* memory_buf)
 {
-	__asm__("write: outsw\t\n"
-            "dec %%ecx\t\n"
-            "jg write"
-            : 
-            : "c"(words), "d"(reg), "S"(memory_buf)); 
+    __asm__("write: outsw\t\n"
+        "dec %%ecx\t\n"
+        "jg write"
+        : 
+        : "c"(words), "d"(reg), "S"(memory_buf)); 
 }

@@ -1,6 +1,13 @@
 #ifndef _LOW_LEVEL_H
 #define _LOW_LEVEL_H
 
+typedef unsigned int   u32int;
+typedef          int   s32int;
+typedef unsigned short u16int;
+typedef          short s16int;
+typedef unsigned char  u8int;
+typedef          char  s8int;
+
 /**/
 unsigned char port_byte_in(unsigned short port);
 /**/

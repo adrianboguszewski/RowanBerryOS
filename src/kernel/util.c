@@ -1,8 +1,18 @@
+#include "util.h"
+
 /* Copy bytes from one place to another. */
 void memory_copy(char* source, char* dest, int no_bytes) 
 {
     for(int i=0; i<no_bytes; i++) 
         *(dest+i) = *(source+i);
+}
+
+// Write len copies of val into dest.
+void memset(u8int *dest, u8int val, u32int len)
+{
+    u8int *temp = (u8int *)dest;
+    for ( ; len != 0; len--) 
+        *temp++ = val;
 }
 
 char get_hex_from_int(unsigned char s)
