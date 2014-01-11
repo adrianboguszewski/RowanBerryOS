@@ -8,7 +8,7 @@ void main() {
     char* message = "Witamy! - RowanBerryOS Team ;D\n";
     print(message);
     __asm__("int $0x1");
-    __asm__("int $0x11");
+    __asm__("int $0x0d");
     /*print_at(message, 70, 24);
     print_at(message, 70, 24);
     print(message);
