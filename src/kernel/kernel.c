@@ -14,6 +14,8 @@ void main()
     char* message = "Witamy! - RowanBerryOS Team ;D\n";
     print(message);
     heap* h = create_heap(HEAP_START, MAX_MEMORY_ADDRESS + 1);
+    print_memory((void*)0x10000, 64);
+    print_memory((void*)0x14000, 64);
     __asm__("int $0x1");
     __asm__("int $0x0d");   
 }

@@ -8,7 +8,7 @@
 #include "../../const/types.h"
 #include "ordered_array.h"
 
-typedef struct
+typedef struct __attribute__((packed))
 {
     u32int magic;       // magic number used for identification
     u8int is_hole;      // 1 if this is hole, 0 otherwise

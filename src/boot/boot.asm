@@ -6,31 +6,18 @@ KERNEL_OFFSET equ 0x1000        ; address to which we will load kernel
     
     mov bp, 0x9000              ; set the stack
     mov sp, bp
-    
-; DELETE
-;    push word MSG_REAL_MODE       ; temporary for debugging
-;    call print_string
-;    add sp, 2
 
     call load_kernel            ; load kernel
 
     call switch_to_pm           ; switch to protected mode
    
-;%include "boot/print_hex.asm"
 %include "boot/print_string.asm"
 %include "boot/disk_load.asm"
 %include "boot/gdt.asm"
-%include "boot/print_string_pm.asm"
 %include "boot/switch_to_pm.asm"
 
 [bits 16]
-
-load_kernel:
-; DELETE
-;    push word MSG_LOAD_KERNEL     ; temporary for debugging 
-;    call print_string
-;    add sp, 2
-    
+load_kernel: 
     mov dh, 15                  ; load first 15 sectors
     mov dl, [BOOT_DRIVE]
     push dx
@@ -40,15 +27,8 @@ load_kernel:
     ret
 
 [bits 32]                       ; next instructions translate as 32-bit
-
-begin_pm:
-; DELETE
-;    push dword MSG_PROTECTED_MODE ; temporary for debugging
-;    call print_string_pm 
-;    add esp, 4   
-    
+begin_pm:    
     call KERNEL_OFFSET
-    
     jmp $
     
 CR equ 0x0d
