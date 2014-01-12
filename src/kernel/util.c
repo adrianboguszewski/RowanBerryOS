@@ -1,4 +1,3 @@
-
 #include "../const/types.h"
 #include "util.h"
 
@@ -8,10 +7,12 @@ void memory_copy(void* source, void* dest, int no_bytes)
         *((u8int*)(dest+i)) = *((u8int*)(source+i));
 }
 
-void memory_set(void* dest, s8int value, u32int bytes)
+// Write len copies of val into dest.
+void memset(void *dest, s8int val, u32int len)
 {
-    for(int i=0; i<bytes; i++)
-        *((s8int*)dest + i) = value;
+    u8int *temp = (u8int *)dest;
+    for ( ; len != 0; len--) 
+        *temp++ = val;
 }
 
 char get_hex_from_int(unsigned char s)

@@ -7,7 +7,7 @@ ordered_array place_ordered_array(void *addr, u32int max_size)
 {
    ordered_array to_ret;
    to_ret.array = (u32int*)addr;
-   memory_set(to_ret.array, 0, max_size * sizeof(u32int*));
+   memset(to_ret.array, 0, max_size * sizeof(u32int*));
    to_ret.size = 0;
    to_ret.max_size = max_size;
    return to_ret;

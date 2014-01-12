@@ -142,7 +142,6 @@ void free(void* p, heap* h)
         head->size += test_head->size; // Increase our size.
         test_foot = (footer*) ((u32int) test_head + // Rewrite it's foot to point to our head.
                 test_head->size - sizeof (footer));
-        print_dword(test_foot);
         test_foot->head = head;
         // Find and remove this head from the index.
         u32int iterator = 0;

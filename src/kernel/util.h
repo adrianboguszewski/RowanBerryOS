@@ -5,10 +5,12 @@
 
 #include "../const/types.h"
 
-/*copy bytes from one place to another. */
+#include "low_level.h"
+
+/*Copy bytes from one place to another.*/
 void memory_copy(void* source, void* dest, int no_bytes);
-/*set value in memory*/
-void memory_set(void* dest, s8int value, u32int bytes);
+/*Write len copies of val into dest.*/
+void memset(void *dest, s8int val, u32int len);
 /*return hex character from integer number*/
 char get_hex_from_int(unsigned char s);
 /*change int to hex*/
