@@ -5,15 +5,15 @@
 #include "../debug/debug.h"
 #include "hard_disk.h"
 
-int read_sectors(int start_lba, char sectors_number, void* memory_buf) 
+u8int read_sectors(u32int start_lba, u8int sectors_number, void* memory_buf) 
 {
-    if(start_lba + (int)sectors_number > MAX_LBA) 
+    if(start_lba + (u32int)sectors_number > MAX_LBA) 
     {
         print_msg("Given LBA plus sectors number exceed maximum LBA for disk\n");
         return LBA_EXCEED_DISK_SIZE;
     }
     
-    unsigned char status;
+    u8int status;
     
     status = port_byte_in(REG_ATA_PRIMARY_7);                   // get status byte from ata device
     
@@ -28,7 +28,7 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
         while((status & 0xc0) != 0x40);
     }
     
-    int mask = 0x000000ff;
+    u32int mask = 0x000000ff;
     
     port_byte_out(REG_ATA_PRIMARY_6, 0xe0);                     // 0x0e for master
     port_byte_out(REG_ATA_PRIMARY_2, sectors_number);           // sectors to read
@@ -48,7 +48,7 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
     }
     while(!(status & 0x08) && (status & 0x80));                 // while BSY is set and DRQ is clear
     
-    unsigned int words = sectors_number * (BPS / 2);
+    u32int words = sectors_number * (BPS / 2);
 
     read_disk(words, REG_ATA_PRIMARY_0, memory_buf);
     
@@ -63,7 +63,7 @@ int read_sectors(int start_lba, char sectors_number, void* memory_buf)
     return OK;
 }    
 
-int write_sectors(int start_lba, char sectors_number, void* memory_buf)
+u8int write_sectors(u32int start_lba, u8int sectors_number, void* memory_buf)
 {
     if(start_lba + (int)sectors_number > MAX_LBA) 
     {
@@ -71,7 +71,7 @@ int write_sectors(int start_lba, char sectors_number, void* memory_buf)
         return LBA_EXCEED_DISK_SIZE;
     }
     
-    unsigned char status;
+    u8int status;
     
     status = port_byte_in(REG_ATA_PRIMARY_7);                   // get status byte from ata device
     
@@ -86,7 +86,7 @@ int write_sectors(int start_lba, char sectors_number, void* memory_buf)
         while((status & 0xc0) != 0x40);
     }
     
-    int mask = 0x000000ff;
+    u32int mask = 0x000000ff;
     
     port_byte_out(REG_ATA_PRIMARY_6, 0xe0);                     // 0x0e for master
     port_byte_out(REG_ATA_PRIMARY_2, sectors_number);           // sectors to read
@@ -106,7 +106,7 @@ int write_sectors(int start_lba, char sectors_number, void* memory_buf)
     }
     while(!(status & 0x08) && (status & 0x80));                 // while BSY is set and DRQ is clear
     
-    unsigned int words = sectors_number * (BPS / 2);
+    u32int words = sectors_number * (BPS / 2);
 
     write_disk(words, REG_ATA_PRIMARY_0, memory_buf);
     

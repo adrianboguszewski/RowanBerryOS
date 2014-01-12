@@ -6,21 +6,23 @@
 #define MAX_COLS 80
 #define WHITE_ON_BLACK 0x0f    // Attribute byte for our default colour scheme.
 
+#include "../const/types.h"
+
 /**/
 void print(char* message);
 /**/
-void print_at(char* message, int col, int row);
+void print_at(char* message, s8int col, s8int row);
 /**/
 void clear_screen();
 /**/
-void print_char(char character, int col, int row, char attribute_byte);
+void print_char(char character, s8int col, s8int row, u8int attribute_byte);
 /**/
-int get_screen_offset(int col, int row);
+u32int get_screen_offset(s8int col, s8int row);
 /**/
-int get_cursor();
+u32int get_cursor();
 /**/
-void set_cursor(int offset);
+void set_cursor(u32int offset);
 /**/
-int handle_scrolling(int cursor_offset);
+u32int handle_scrolling(u32int cursor_offset);
 
 #endif

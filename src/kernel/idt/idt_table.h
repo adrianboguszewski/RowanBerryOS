@@ -1,7 +1,7 @@
 #ifndef _IDT_TABLE_H
 #define _IDT_TABLE_H
 
-#include "../../kernel/low_level.h"
+#include "../../const/types.h"
 
 // Lets us access our ASM functions from our C code.
 extern void idt_flush(u32int);

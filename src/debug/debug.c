@@ -6,7 +6,7 @@
 // defined in assembly
 // void print_registers()
 
-void print_memory(void* start, int bytes)
+void print_memory(void* start, u32int bytes)
 {    
     unsigned char byte;
     char* result = "0x00 ";
@@ -23,21 +23,21 @@ void print_msg(char* msg)
     print(msg);
 }
 
-void print_byte(unsigned char b)
+void print_byte(u8int b)
 {
     char* result = "0x00 \n";
     byte_to_hex(b, result);
     print(result);
 }
 
-void print_word(unsigned short b)
+void print_word(u16int b)
 {
     char* result = "0x0000 \n";
     word_to_hex(b, result);
     print(result);
 }
 
-void print_dword(unsigned int b)
+void print_dword(u32int b)
 {
     char* result = "0x00000000 \n";
     dword_to_hex(b, result);

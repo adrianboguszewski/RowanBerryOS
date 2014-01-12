@@ -4,11 +4,13 @@
 #include "heap/heap.h"
 #include "util.h"
 #include "../const/machine.h"
-#include "../boot/idt/idt_table.h"
+#include "idt/idt_table.h"
 
 void main() 
 {
     init_idt();
+    read_sectors(0, 1, (void*)0x10000);
+    print_memory((void*)0x10000, 128);
     char* message = "Witamy! - RowanBerryOS Team ;D\n";
     print(message);
     heap* h = create_heap(HEAP_START, MAX_MEMORY_ADDRESS + 1);

@@ -1,7 +1,7 @@
 #include "../const/types.h"
 #include "util.h"
 
-void memory_copy(void* source, void* dest, int no_bytes) 
+void memory_copy(void* source, void* dest, u32int no_bytes) 
 {
     for(int i=0; i<no_bytes; i++) 
         *((u8int*)(dest+i)) = *((u8int*)(source+i));
@@ -15,7 +15,7 @@ void memset(void *dest, s8int val, u32int len)
         *temp++ = val;
 }
 
-char get_hex_from_int(unsigned char s)
+char get_hex_from_int(u8int s)
 {
     if(s < 10)
         return s+= '0';
@@ -23,29 +23,29 @@ char get_hex_from_int(unsigned char s)
         return s+= 'a' - 10;
 }
 
-void dword_to_hex(unsigned int source, char* dest)
+void dword_to_hex(u32int source, char* dest)
 {
-    unsigned int mask = 0x0000000f;
+    u32int mask = 0x0000000f;
     for(int i = 0; i < 8; i++)
     {
-        dest[9 - i] = get_hex_from_int((char)(source & mask));
+        dest[9 - i] = get_hex_from_int((u8int)(source & mask));
         source >>= 4;
     }
 }
 
-void word_to_hex(unsigned short source, char* dest)
+void word_to_hex(u16int source, char* dest)
 {
-    unsigned char mask = 0x000f;
+    u16int mask = 0x000f;
     for(int i = 0; i < 4; i++)
     {
-        dest[5 - i] = get_hex_from_int((char)(source & mask));
+        dest[5 - i] = get_hex_from_int((u8int)(source & mask));
         source >>= 4;
     }
 }
 
-void byte_to_hex(unsigned char source, char* dest)
+void byte_to_hex(u8int source, char* dest)
 {
-    unsigned char mask = 0x0f;
+    u8int mask = 0x0f;
     for(int i = 0; i < 2; i++)
     {
         dest[3 - i] = get_hex_from_int(source & mask);

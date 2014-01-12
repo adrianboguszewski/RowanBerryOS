@@ -1,5 +1,5 @@
-#include "../../kernel/low_level.h"
-#include "../../kernel/util.h"
+#include "../low_level.h"
+#include "../util.h"
 #include "../../drivers/screen.h"
 #include "isr.h"
 
