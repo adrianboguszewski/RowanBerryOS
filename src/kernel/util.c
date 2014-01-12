@@ -1,8 +1,17 @@
-/* Copy bytes from one place to another. */
-void memory_copy(char* source, char* dest, int no_bytes) 
+
+#include "../const/types.h"
+#include "util.h"
+
+void memory_copy(void* source, void* dest, int no_bytes) 
 {
     for(int i=0; i<no_bytes; i++) 
-        *(dest+i) = *(source+i);
+        *((u8int*)(dest+i)) = *((u8int*)(source+i));
+}
+
+void memory_set(void* dest, s8int value, u32int bytes)
+{
+    for(int i=0; i<bytes; i++)
+        *((s8int*)dest + i) = value;
 }
 
 char get_hex_from_int(unsigned char s)

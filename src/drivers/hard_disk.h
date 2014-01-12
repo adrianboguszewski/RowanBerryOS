@@ -1,5 +1,5 @@
-#ifndef _HARD_DISK_H
-#define _HARD_DISK_H
+#ifndef HARD_DISK_H
+#define HARD_DISK_H
 
 /*read given number of sectors from disk, staring from start_lba and place them in memory*/
 int read_sectors(int start_lba, char sectors_number, void* memory_buf);

@@ -1,5 +1,5 @@
-#ifndef _DEBUG_H
-#define _DEBUG_H
+#ifndef DEBUG_H
+#define DEBUG_H
 
 /*print all general purposed registers and flags register*/
 void print_registers();
@@ -13,5 +13,6 @@ void print_byte(unsigned char b);
 void print_word(unsigned short b);
 /*print variable size of dword*/
 void print_dword(unsigned int b);
-
+/*print message "I reached" */
+void print_db();
 #endif

@@ -43,3 +43,8 @@ void print_dword(unsigned int b)
     dword_to_hex(b, result);
     print(result);
 }
+
+void print_db()
+{
+    print("I reached");
+}

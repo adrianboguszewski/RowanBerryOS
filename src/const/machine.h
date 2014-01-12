@@ -6,4 +6,4 @@
 #define LBA(c, h, s) ((c * HPC) + h) * SPT + s - 1     // LBA from CHS
 #define MAX_LBA LBA(CPH, HPC, SPT)                     // max LBA
 #define MEMORY_MB 32                                   // memory in MB
-#define MAX_MEMORY_ADDRESS (2 << 20) * MEMORY_MB - 1   // max memory address
+#define MAX_MEMORY_ADDRESS (1 << 20) * MEMORY_MB - 1   // max memory address
