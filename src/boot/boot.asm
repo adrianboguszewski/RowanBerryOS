@@ -18,7 +18,7 @@ KERNEL_OFFSET equ 0x1000        ; address to which we will load kernel
 
 [bits 16]
 load_kernel: 
-    mov dh, 15                  ; load first 15 sectors
+    mov dh, 30                  ; load first 30 sectors
     mov dl, [BOOT_DRIVE]
     push dx
     push word KERNEL_OFFSET

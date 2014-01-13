@@ -46,5 +46,5 @@ void print_dword(u32int b)
 
 void print_db()
 {
-    print("I reached");
+    print("I reached\n");
 }

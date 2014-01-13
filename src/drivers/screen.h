@@ -8,21 +8,22 @@
 
 #include "../const/types.h"
 
+void print_time(u32int time);
 /**/
 void print(char* message);
 /**/
-void print_at(char* message, s8int col, s8int row);
+void print_at(char* message, int col, int row);
 /**/
 void clear_screen();
 /**/
-void print_char(char character, s8int col, s8int row, u8int attribute_byte);
+void print_char(char character, int col, int row, char attribute_byte);
 /**/
-u32int get_screen_offset(s8int col, s8int row);
+int get_screen_offset(int col, int row);
 /**/
-u32int get_cursor();
+int get_cursor();
 /**/
-void set_cursor(u32int offset);
+void set_cursor(int offset);
 /**/
-u32int handle_scrolling(u32int cursor_offset);
+int handle_scrolling(int cursor_offset);
 
 #endif

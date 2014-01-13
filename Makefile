@@ -36,13 +36,13 @@ $(TARGET)/kernel.bin: ${OBJ} ${OBJ2}
 	$(LINKER) -o $@ -Ttext 0x1000 $^ --oformat binary -m elf_i386
 
 $(TARGET)/%.o: $(SRC)/%.c ${HEADERS}
-	$(CC) -ffreestanding -Wall -std=gnu99 -c $< -o $@ -m32
+	$(CC) -ffreestanding -Wall -m32 -std=gnu99 -c $< -o $@ 
 	
 $(TARGET)/%.o: $(SRC)/%.asm
-	$(ASSEMBLER) $< -f elf -o $@
+	$(ASSEMBLER) -f elf $< -o $@
 
 $(TARGET)/%.bin: $(SRC)/boot/%.asm
-	$(ASSEMBLER) $< -f bin -i $(SRC)/ -o $@
+	$(ASSEMBLER) -f bin $< -i $(SRC)/ -o $@
 	
 clean:
 	rm -rf $(TARGET)/

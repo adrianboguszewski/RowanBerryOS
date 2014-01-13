@@ -1,6 +1,7 @@
 #include "../low_level.h"
 #include "../util.h"
 #include "idt_table.h"
+#include "../../const/registers.h"
 
 idt_entry_t idt_entries[256];
 idt_ptr_t   idt_ptr;
@@ -11,6 +12,18 @@ void init_idt()
    idt_ptr.base  = (u32int)&idt_entries;
 
    memset((u8int*)&idt_entries, 0, (sizeof(idt_entry_t)*256));
+   
+   // remap the irq table
+   port_byte_out(REG_PIC1_COMMAND, 0x11);       // start initialization
+   port_byte_out(REG_PIC2_COMMAND, 0x11);       
+   port_byte_out(REG_PIC1_DATA, 0x20);          // master pic vector offset
+   port_byte_out(REG_PIC2_DATA, 0x28);          // slave pic vector offset
+   port_byte_out(REG_PIC1_DATA, 0x04);          // tell master pic that there is a slave pic at irq2
+   port_byte_out(REG_PIC2_DATA, 0x02);          // tell slave pic its cascade identity
+   port_byte_out(REG_PIC1_DATA, 0x01);          // 8086/88 mode
+   port_byte_out(REG_PIC2_DATA, 0x01);
+   port_byte_out(REG_PIC1_DATA, 0x0);
+   port_byte_out(REG_PIC2_DATA, 0x0);
 
    idt_set_gate( 0, (u32int)isr0 , 0x08, 0x8E);
    idt_set_gate( 1, (u32int)isr1 , 0x08, 0x8E);
@@ -44,6 +57,22 @@ void init_idt()
    idt_set_gate(29, (u32int)isr29, 0x08, 0x8E);
    idt_set_gate(30, (u32int)isr30, 0x08, 0x8E);
    idt_set_gate(31, (u32int)isr31, 0x08, 0x8E);
+   idt_set_gate(32, (u32int)irq0, 0x08, 0x8E);
+   idt_set_gate(33, (u32int)irq1, 0x08, 0x8E);
+   idt_set_gate(34, (u32int)irq2, 0x08, 0x8E);
+   idt_set_gate(35, (u32int)irq3, 0x08, 0x8E);
+   idt_set_gate(36, (u32int)irq4, 0x08, 0x8E);
+   idt_set_gate(37, (u32int)irq5, 0x08, 0x8E);
+   idt_set_gate(38, (u32int)irq6, 0x08, 0x8E);
+   idt_set_gate(39, (u32int)irq7, 0x08, 0x8E);
+   idt_set_gate(40, (u32int)irq8, 0x08, 0x8E);
+   idt_set_gate(41, (u32int)irq9, 0x08, 0x8E);
+   idt_set_gate(42, (u32int)irq10, 0x08, 0x8E);
+   idt_set_gate(43, (u32int)irq11, 0x08, 0x8E);
+   idt_set_gate(44, (u32int)irq12, 0x08, 0x8E);
+   idt_set_gate(45, (u32int)irq13, 0x08, 0x8E);
+   idt_set_gate(46, (u32int)irq14, 0x08, 0x8E);
+   idt_set_gate(47, (u32int)irq15, 0x08, 0x8E);
 
    idt_flush((u32int)&idt_ptr);
 }
