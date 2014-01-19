@@ -8,7 +8,7 @@ heap* create_heap(u32int start, u32int end_addr)
 {
     heap* h = (heap*)start;
     // Initialise the index.
-    h->index = place_ordered_array((void*)(start + sizeof(heap)), HEAP_INDEX_SIZE);
+    h->index = create_ordered_array((void*)(start + sizeof(heap)), HEAP_INDEX_SIZE);
 
     // Shift the start address forward to resemble where we can start putting data.
     start += sizeof (u32int*)*HEAP_INDEX_SIZE + sizeof(heap);

@@ -11,7 +11,7 @@ typedef struct
 } ordered_array;
 
 /*place array in memory*/
-ordered_array place_ordered_array(void* addr, u32int max_size);
+ordered_array create_ordered_array(void* addr, u32int max_size);
 /*insert element to array*/
 void insert_ordered_array(u32int item, ordered_array* array);
 /*return value under given index*/

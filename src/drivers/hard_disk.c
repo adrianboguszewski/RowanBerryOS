@@ -100,8 +100,8 @@ u8int write_sectors(u32int start_lba, u8int sectors_number, void* memory_buf)
         status = port_byte_in(REG_ATA_PRIMARY_7);               // get status
         if(status & 0x21)                                       // DF or ERR is set?
         {
-            print_msg("A disk read error occured before writing\n");
-            return DISK_READ_ERROR;
+            print_msg("A disk write error occured before writing\n");
+            return DISK_WRITE_ERROR;
         }
     }
     while(!(status & 0x08) && (status & 0x80));                 // while BSY is set and DRQ is clear
@@ -114,8 +114,8 @@ u8int write_sectors(u32int start_lba, u8int sectors_number, void* memory_buf)
     
     if(status & 0x21)                                           // DF or ERR is set?
     {
-        print_msg("A disk read error occured after writing\n");
-        return DISK_READ_ERROR;
+        print_msg("A disk write error occured after writing\n");
+        return DISK_WRITE_ERROR;
     }
     
     port_byte_out(REG_ATA_PRIMARY_7, 0xe7);                     // FLUSH CACHE command

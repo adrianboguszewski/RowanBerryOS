@@ -51,17 +51,17 @@ void get_cmd(char* buf, int n)
     cmd();
 
     int key = KEY_UNKNOWN;
-    boolean BufChar;
+    boolean buf_char;
 
     // get command string
-    int i=0;
+    int i = 0;
     while(i < n) 
     {
         // buffer the next char
-        BufChar = true;
+        buf_char = true;
 
         // grab next char
-        key = getch ();
+        key = getch();
 
         // end of command if enter is pressed
         if(key == KEY_RETURN)
@@ -72,7 +72,7 @@ void get_cmd(char* buf, int n)
         if(key == KEY_BACKSPACE) 
         {
             // dont buffer this char
-            BufChar = false;
+            buf_char = false;
             if(i > 0) 
             {
                 remove_last_char();
@@ -80,7 +80,7 @@ void get_cmd(char* buf, int n)
         }
 
         // only add the char if it is to be buffered
-        if (BufChar) 
+        if (buf_char) 
         {
             // convert key to an ascii char and put it in buffer
             char c = kkybrd_key_to_ascii(key);

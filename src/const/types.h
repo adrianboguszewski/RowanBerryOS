@@ -6,5 +6,5 @@ typedef int             s32int;
 typedef unsigned int    u32int;
 
 typedef int             boolean;
-#define true            1;
-#define false           0;
+#define true            1
+#define false           0

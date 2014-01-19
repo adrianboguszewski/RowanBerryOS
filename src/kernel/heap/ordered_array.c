@@ -3,7 +3,7 @@
 #include "../../const/machine.h"
 #include "heap.h"
 
-ordered_array place_ordered_array(void *addr, u32int max_size)
+ordered_array create_ordered_array(void *addr, u32int max_size)
 {
    ordered_array to_ret;
    to_ret.array = (u32int*)addr;

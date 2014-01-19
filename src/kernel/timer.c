@@ -37,5 +37,5 @@ void init_timer(u32int frequency)
 void sleep(u32int ms) 
 {
     u32int ticks = ms + tick;
-    while(ticks > tick) { };
+    while(ticks > tick);
 }
