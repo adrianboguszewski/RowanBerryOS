@@ -15,8 +15,11 @@ void isr_handler(registers_t regs)
    print(result);
 } 
 
+// This gets called from our ASM interrupt handler stub.
 void irq_handler(registers_t regs)
 {
+    // Send an EOI (end of interrupt) signal to the PICs.
+    // If this interrupt involved the slave.
     if(regs.int_no >= 40)
         port_byte_out(REG_PIC2_COMMAND, 0x20);  // send end of interrupt signal to slave
 

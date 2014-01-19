@@ -12,6 +12,8 @@ void print_time(u32int time);
 /**/
 void print(char* message);
 /**/
+void remove_last_char();
+/**/
 void print_at(char* message, int col, int row);
 /**/
 void clear_screen();

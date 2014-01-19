@@ -7,6 +7,14 @@ void print(char* message) {
     print_at(message, -1, -1);
 }
 
+void remove_last_char() 
+{
+    int offset = get_cursor();
+    set_cursor(offset-2);
+    print(" ");
+    set_cursor(offset-2);
+}
+
 void print_at(char* message, int col, int row) {
     // Update the cursor if col and row not negative.
     if(col >= 0 && row >= 0) {

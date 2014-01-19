@@ -107,15 +107,19 @@ isr_common_stub:
    sti
    iret         ; pops 5 things at once: CS, EIP, EFLAGS, SS, and ESP 
 
-
+; In isr.c
 [extern irq_handler]
+
+; This is our common IRQ stub. It saves the processor state, sets
+; up for kernel mode segments, calls the C-level fault handler,
+; and finally restores the stack frame. 
 irq_common_stub:
     pusha
 
     mov ax, ds
-    push eax
+    push eax        ; save the data segment descriptor
     
-    mov ax, 0x10
+    mov ax, 0x10    ; load the kernel data segment descriptor
     mov ds, ax
     mov es, ax
     mov fs, ax
@@ -123,7 +127,7 @@ irq_common_stub:
 
     call irq_handler
 
-    pop eax
+    pop eax         ; reload the original data segment descriptor
     mov ds, ax
     mov es, ax
     mov fs, ax
