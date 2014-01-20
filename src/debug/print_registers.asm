@@ -4,8 +4,8 @@ extern dword_to_hex
 extern print
 
 print_registers:
-    pushad
-    pushf
+    pushad                      ; push all registers on stack
+    pushf                       ; push flags
     push ebp
     mov ebp, esp
     mov ebx, 9

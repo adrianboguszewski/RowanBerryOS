@@ -23,10 +23,11 @@ typedef struct
 
 typedef struct
 {
-    ordered_array index; 
-    u32int start_address;
-    u32int end_address;
+    ordered_array index; // ordered array with pointers to holes
+    u32int start_address;// heap start address
+    u32int end_address;  // heap end address
 } heap;
+
 /*create heap and place it in memory*/
 heap* create_heap(u32int start, u32int end_addr);
 /*alloc given number of bytes*/

@@ -33,9 +33,3 @@ void init_timer(u32int frequency)
     port_byte_out(REG_PIT_CHANNEL0, (u8int)(divisor & mask));           // send the frequency divisor
     port_byte_out(REG_PIT_CHANNEL0, (u8int)((divisor >> 8) & mask));
 }
-
-void sleep(u32int ms) 
-{
-    u32int ticks = ms + tick;
-    while(ticks > tick);
-}

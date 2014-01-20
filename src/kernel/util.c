@@ -7,7 +7,6 @@ void memory_copy(void* source, void* dest, u32int no_bytes)
         *((u8int*)(dest+i)) = *((u8int*)(source+i));
 }
 
-// Write len copies of val into dest.
 void memset(void *dest, s8int val, u32int len)
 {
     u8int *temp = (u8int *)dest;

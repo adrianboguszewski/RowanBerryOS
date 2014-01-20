@@ -3,7 +3,7 @@
 #include "screen.h"
 #include "../kernel/low_level.h"
 
-char scancode;                          // current scan code
+u8int scancode;                          // current scan code
 boolean numlock, scrolllock, capslock;  // lock keys
 boolean shift, alt, ctrl;               // shift, alt, and ctrl keys current state
 int kkybrd_error = 0;                   // set if keyboard error
@@ -121,7 +121,6 @@ void init_keyboard()
     ctrl = false;
 }
 
-// keyboard interrupt handler
 void keyboard_handler() 
 {
     //boolean extended;
@@ -221,19 +220,16 @@ void keyboard_handler()
     }
 }
 
-// read status from keyboard controller
 u8int kybrd_ctrl_read_status() 
 {
     return port_byte_in(KYBRD_CTRL_STATS_REG);
 }
 
-// read keyboard encoder buffer
 u8int kybrd_enc_read_buf() 
 {
     return port_byte_in(KYBRD_ENC_INPUT_BUF);
 }
 
-// send command byte to keyboard controller
 void kybrd_ctrl_send_cmd(u8int cmd) 
 {
     // wait for kybrd controller input buffer to be clear
@@ -246,8 +242,7 @@ void kybrd_ctrl_send_cmd(u8int cmd)
     }
     port_byte_out(KYBRD_CTRL_CMD_REG, cmd);
 }
- 
-// send command byte to keyboard encoder
+
 void kybrd_enc_send_cmd(u8int cmd) 
 {
     // wait for kybrd controller input buffer to be clear
@@ -262,73 +257,61 @@ void kybrd_enc_send_cmd(u8int cmd)
     port_byte_out(KYBRD_ENC_CMD_REG, cmd);
 }
 
-// returns scroll lock state
 boolean	kkybrd_get_scroll_lock() 
 {
     return scrolllock;
 }
 
-// returns num lock state
 boolean	kkybrd_get_numlock() 
 {
     return numlock;
 }
 
-// returns caps lock state
 boolean	kkybrd_get_capslock()	
 {
     return capslock;
 }
 
-// returns status of control key
 boolean	kkybrd_get_ctrl()	
 {
     return ctrl;
 }
 
-// returns status of alt key
 boolean	kkybrd_get_alt() 
 {
     return alt;
 }
 
-// returns status of shift key
 boolean	kkybrd_get_shift()
 {
     return shift;
 }
 
-// tells driver to ignore last resend request
 void kkybrd_ignore_resend()
 {
     kkybrd_resend_res = false;
 }
 
-// return if system should redo last commands
 boolean kkybrd_check_resend() 
 {
     return kkybrd_resend_res;
 }
 
-// return diagnostics test result
 boolean kkybrd_get_diagnostic_res() 
 {
     return kkybrd_diag_res;
 }
 
-// return BAT test result
 boolean kkybrd_get_bat_res() 
 {
     return kkybrd_bat_res;
 }
 
-// return last scan code
 u8int kkybrd_get_last_scan()	
 {	
     return scancode;
 }
 
-// sets leds
 void kkybrd_set_leds(boolean num, boolean caps, boolean scroll) 
 {
     u8int data = 0;
@@ -343,19 +326,16 @@ void kkybrd_set_leds(boolean num, boolean caps, boolean scroll)
     kybrd_enc_send_cmd(data);
 }
 
-// get last key stroke
-int kkybrd_get_last_key() 
+u32int kkybrd_get_last_key() 
 {
-    return (scancode!=INVALID_SCANCODE) ? (kkybrd_scancode_std[scancode]) : (KEY_UNKNOWN);
+    return (scancode != INVALID_SCANCODE) ? (kkybrd_scancode_std[scancode]) : (KEY_UNKNOWN);
 }
 
-// discards last scan
 void kkybrd_discard_last_key() 
 {
     scancode = INVALID_SCANCODE;
 }
 
-// convert key to an ascii character
 char kkybrd_key_to_ascii(int code)
 {
     u8int key = code;
@@ -455,27 +435,23 @@ char kkybrd_key_to_ascii(int code)
     return 0;
 }
 
-// disables the keyboard
 void disable_kkybrd() 
 {
     kybrd_ctrl_send_cmd(KYBRD_CTRL_CMD_DISABLE);
     kkybrd_disable = true;
 }
 
-// enables the keyboard
 void enable_kkybrd() 
 {
     kybrd_ctrl_send_cmd (KYBRD_CTRL_CMD_ENABLE);
     kkybrd_disable = false;
 }
 
-// returns true if keyboard is disabled
 boolean kkybrd_is_disabled() 
 {
     return kkybrd_disable;
 }
 
-// reset the system
 void kkybrd_reset_system() 
 {
     // writes 11111110 to the output port (sets reset system line low)
@@ -483,7 +459,6 @@ void kkybrd_reset_system()
     kybrd_enc_send_cmd(0xfe);
 }
 
-// run self test
 boolean kkybrd_self_test() 
 {
     // send command

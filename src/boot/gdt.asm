@@ -30,8 +30,7 @@ gdt_end:
 
 gdt_descriptor:
     dw gdt_end - gdt_start - 1  ; size of our GDT , always less one of the true size
-    dd gdt_start
-    
+    dd gdt_start   
     
 CODE_SEG equ gdt_code - gdt_start
 DATA_SEG equ gdt_data - gdt_start

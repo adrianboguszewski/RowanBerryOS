@@ -15,7 +15,7 @@ void remove_last_char()
     set_cursor(offset-2);
 }
 
-void print_at(char* message, int col, int row) {
+void print_at(char* message, s8int col, s8int row) {
     // Update the cursor if col and row not negative.
     if(col >= 0 && row >= 0) {
         set_cursor(get_screen_offset(col, row));
@@ -57,9 +57,9 @@ void print_time(u32int time) {
 }
 
 /* Print a char on the screen at col, row, or at cursor position */
-void print_char(char character, int col, int row, char attribute_byte) {
+void print_char(char character, s8int col, s8int row, u8int attribute_byte) {
     /* Create a byte (char) pointer to the start of video memory */
-    unsigned char *vidmem = (unsigned char *)VIDEO_ADDRESS;
+    u8int *vidmem = (u8int *)VIDEO_ADDRESS;
     
     /* If attribute byte is zero, assume the default style. */
     if(!attribute_byte) {
@@ -104,11 +104,11 @@ void print_char(char character, int col, int row, char attribute_byte) {
     set_cursor(offset);
 }
 
-int get_screen_offset(int col, int row) {
+u32int get_screen_offset(s8int col, s8int row) {
     return (row*MAX_COLS + col)*2;    // Each cell holds two bytes.
 }
 
-int get_cursor() {
+u32int get_cursor() {
     // The device uses its control register as an index
     // to select its internal registers, of which we are
     // interested in:
@@ -128,7 +128,7 @@ int get_cursor() {
     return offset*2;
 }
 
-void set_cursor(int offset) {
+void set_cursor(u32int offset) {
     offset /= 2;    // Convert from cell offset to char offset.
     
     // This is similar to get_cursor, only now we write
@@ -140,7 +140,7 @@ void set_cursor(int offset) {
 }
 
 /* Advance the text cursor, scrolling the video buffer if necessary. */
-int handle_scrolling(int cursor_offset) {
+u32int handle_scrolling(u32int cursor_offset) {
     // If the cursor is within the screen, return it unmodified.
     if(cursor_offset < MAX_ROWS*MAX_COLS *2) {
         return cursor_offset;

@@ -6,7 +6,9 @@
 // Lets us access our ASM functions from our C code.
 extern void idt_flush(u32int);
 
+/*idt initialization*/
 void init_idt();
+/*create interrupt descriptor*/
 void idt_set_gate(u8int, u32int, u16int, u8int);
 
 // A struct describing an interrupt gate.

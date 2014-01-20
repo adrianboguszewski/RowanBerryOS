@@ -4,6 +4,7 @@
 #include "isr.h"
 #include "../../const/registers.h"
 
+// array with interrupts callbacks
 isr_t interrupt_handler[256];
 
 // This gets called from our ASM interrupt handler stub.

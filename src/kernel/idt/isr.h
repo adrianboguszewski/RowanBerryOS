@@ -29,7 +29,7 @@ typedef struct registers
 } registers_t; 
 
 typedef void (*isr_t)(registers_t);
-
+/*add interrupt callback to array*/
 void register_interrupt_handler(u8int n, isr_t handler);
 
 #endif

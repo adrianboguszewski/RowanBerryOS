@@ -82,6 +82,7 @@ void idt_set_gate(u8int num, u32int base, u16int sel, u8int flags)
    idt_entries[num].base_lo = base & 0xFFFF;
    idt_entries[num].base_hi = (base >> 16) & 0xFFFF;
 
+   // selector
    idt_entries[num].sel     = sel;
    idt_entries[num].always0 = 0;
    // We must uncomment the OR below when we get to using user-mode.

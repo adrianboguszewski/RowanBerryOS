@@ -7,9 +7,9 @@
 
 #include "low_level.h"
 
-/*Copy bytes from one place to another.*/
+/*copy bytes from one place to another.*/
 void memory_copy(void* source, void* dest, u32int no_bytes);
-/*Write len copies of val into dest.*/
+/*write len copies of val into dest.*/
 void memset(void *dest, s8int val, u32int len);
 /*return hex character from integer number*/
 char get_hex_from_int(u8int s);

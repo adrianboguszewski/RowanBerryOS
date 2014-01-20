@@ -31,13 +31,7 @@ begin_pm:
     call KERNEL_OFFSET
     jmp $
     
-CR equ 0x0d
-LF equ 0x0a
-
 BOOT_DRIVE          db 0
-MSG_REAL_MODE       db "Started in 16-bit Real Mode", LF, CR, 0
-MSG_PROTECTED_MODE  db "Successfully landed in 32-bit Protected Mode", 0
-MSG_LOAD_KERNEL     db "Loading kernel into memory", LF, CR, 0
 
     times 510 - ($ - $$) db 0
-    dw 0xaa55
+    dw 0xaa55                   ; magic number determining boot sector

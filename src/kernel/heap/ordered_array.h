@@ -5,9 +5,9 @@
 
 typedef struct
 {
-   u32int* array;
-   u32int size;
-   u32int max_size;
+   u32int* array;       // array with pointers to holes
+   u32int size;         // array size
+   u32int max_size;     // array max allowed size
 } ordered_array;
 
 /*place array in memory*/

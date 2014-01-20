@@ -3,33 +3,59 @@
 
 #include "../const/types.h"
 
+/*initialize keyboard*/
 void init_keyboard();
+/*keyboard interrupt handler*/
 void keyboard_handler();
+/*read status from keyboard controller*/
 u8int kybrd_ctrl_read_status();
+/*read keyboard encoder buffer*/
 u8int kybrd_enc_read_buf();
-void kybrd_ctrl_send_cmd(u8int cmd);
+/*send command byte to keyboard controller*/
+void kybrd_ctrl_send_cmd(u8int cmd); 
+/*send command byte to keyboard encoder*/
 void kybrd_enc_send_cmd(u8int cmd);
 
+/*returns scroll lock state*/
 boolean	kkybrd_get_scroll_lock();
+/*returns num lock state*/
 boolean	kkybrd_get_numlock();
+/*returns caps lock state*/
 boolean	kkybrd_get_capslock();
+/*returns status of control key*/
 boolean	kkybrd_get_ctrl();
+/*returns status of alt key*/
 boolean	kkybrd_get_alt();
+/*returns status of shift key*/
 boolean	kkybrd_get_shift();
 
+/*tells driver to ignore last resend request*/
 void kkybrd_ignore_resend();
+/*return if system should redo last commands*/
 boolean kkybrd_check_resend();
+/*return diagnostics test result*/
 boolean kkybrd_get_diagnostic_res();
+/*return BAT test result*/
 boolean kkybrd_get_bat_res();
+/*return last scan code*/
 u8int kkybrd_get_last_scan();
+/*sets leds*/
 void kkybrd_set_leds(boolean num, boolean caps, boolean scroll);
-int kkybrd_get_last_key();
+/*get last key stroke*/
+u32int kkybrd_get_last_key();
+/*discards last scan*/
 void kkybrd_discard_last_key();
+/*convert key to an ascii character*/
 char kkybrd_key_to_ascii(int code);
+/*disables the keyboard*/
 void disable_kkybrd();
+/*enables the keyboard*/
 void enable_kkybrd();
+/*returns true if keyboard is disabled*/
 boolean kkybrd_is_disabled();
+/*reset the system*/
 void kkybrd_reset_system();
+/*run self test*/
 boolean kkybrd_self_test();
 
 // Keyboard encoder----------------------------------------------
@@ -115,7 +141,7 @@ boolean kkybrd_self_test();
 #define KEY_8           '8'
 #define KEY_9           '9'
 
-#define KEY_A           0x61
+#define KEY_A           'a'
 #define KEY_B           'b'
 #define KEY_C           'c'
 #define KEY_D           'd'

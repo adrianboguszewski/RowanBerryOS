@@ -1,7 +1,9 @@
-# Tell bochs to use our boot sector code as though it were
-# a floppy disk inserted into a computer at boot time.
+# 32Mb of memory
 memory: guest=32, host=32
+# one hard disk at primary master
 ata0-master: type=disk, path=target/image, mode=flat, translation=lba, cylinders=256, heads=16, spt=63
 boot: disk
-display_library: sdl
+# PIT
 clock: sync=realtime, time0=local
+
+display_library: sdl

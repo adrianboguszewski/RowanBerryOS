@@ -10,8 +10,8 @@
 
 #include "../const/types.h"
 
+/*init timer*/
 void init_timer(u32int frequency);
-void sleep(u32int ms);
 
 #endif	/* TIMER_H */
 

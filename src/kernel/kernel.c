@@ -15,14 +15,15 @@ void main()
     init_idt();
     init_timer(0);
     init_keyboard();
-    read_sectors(0, 1, (void*)0x10000);
-    print_memory((void*)0x10000, 128);
     char* message = "Witamy! - RowanBerryOS Team ;D\n";
     print(message);
-    run();
+//    read_sectors(0, 1, (void*)0x10000);
+//    print_memory((void*)0x10000, 128);
+//    print_registers();
 //    heap* h = create_heap(HEAP_START, MAX_MEMORY_ADDRESS + 1);
 //    print_memory((void*)0x10000, 64);
 //    print_memory((void*)0x14000, 64);
+    run();
 }
 
 // wait for key stroke
